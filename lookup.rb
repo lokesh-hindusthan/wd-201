@@ -24,9 +24,9 @@ def parse_dns(rawinput)
   rawinput.
     reject { line.include?("#") || |line| line.strip.empty? }.
     map { |line| line.strip.split(", ") }.
-    reject do |record|
+    reject do |resolverecord|
   end.
-    each_with_object({}) do |record, records|
+    each_with_object({}) do |resolverecord, knownrecords|
      knownrecords[resolverecord[1]] = { type: resolverecord[0], target: resolverecord[2] }
   end
 end
