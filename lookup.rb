@@ -22,7 +22,7 @@ dns_raw = File.readlines("zone")
 def parse_dns(rawinput)
   knownrecords = {}
   rawinput.
-    reject { |line| line.strip.empty? || line.include?("#") }.
+    reject { line.include?("#") || |line| line.strip.empty? }.
     map { |line| line.strip.split(", ") }.
     reject do |record|
   end.
@@ -33,7 +33,7 @@ end
 
 def resolve(dns_records, lookup_chain, domain_name)
   resolverecord = dns_records[domain_name]
-  if record[:type] == "CNAME"
+  if resolverecord[:type] == "CNAME"
     lookup_chain <<  resolverecord[:target]
     resolve(dns_records, lookup_chain,  resolverecord[:target])
   elsif  resolverecord[:type] == "A"
