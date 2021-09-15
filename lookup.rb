@@ -19,29 +19,29 @@ domain = get_command_line_argument
 
 dns_raw = File.readlines("zone")
 
-def parse_dns(raw)
-  records = {}
-  raw.
+def parse_dns(rawinput)
+  knownrecords = {}
+  rawinput.
     reject { |line| line.strip.empty? || line.include?("#") }.
     map { |line| line.strip.split(", ") }.
     reject do |record|
   end.
     each_with_object({}) do |record, records|
-    records[record[1]] = { type: record[0], target: record[2] }
+     knownrecords[resolverecord[1]] = { type: resolverecord[0], target: resolverecord[2] }
   end
 end
 
-def resolve(dns_records, lookup_chain, domain)
-  record = dns_records[domain]
-  if (!record)
-    lookup_chain << "Error: Record not found for " + domain
-  elsif record[:type] == "CNAME"
-    lookup_chain << record[:target]
-    resolve(dns_records, lookup_chain, record[:target])
-  elsif record[:type] == "A"
-    lookup_chain << record[:target]
+def resolve(dns_records, lookup_chain, domain_name)
+  resolverecord = dns_records[domain_name]
+  if record[:type] == "CNAME"
+    lookup_chain <<  resolverecord[:target]
+    resolve(dns_records, lookup_chain,  resolverecord[:target])
+  elsif  resolverecord[:type] == "A"
+    lookup_chain <<  resolverecord[:target]
+  elsif (! resolverecord)
+    lookup_chain << "Error: Record not found for " + domain_name
   else
-    lookup_chain << "Invalid record type for " + domain
+    lookup_chain << "Invalid record type for " + domain_name
   end
 end
 
