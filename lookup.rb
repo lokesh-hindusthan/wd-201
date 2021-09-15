@@ -1,7 +1,7 @@
 def get_command_line_argument
   # ARGV is an array that Ruby defines for us,
   # which contains all the arguments we passed to it
-  # when invoking the script from the command line.
+  # when invoking the  script from the command line.
   # https://docs.ruby-lang.org/en/2.4.0/ARGF.html
   if ARGV.empty?
     puts "Usage: ruby lookup.rb <domain>"
