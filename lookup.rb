@@ -22,7 +22,7 @@ dns_raw = File.readlines("zone")
 def parse_dns(rawinput)
   knownrecords = {}
   rawinput.
-    reject { |line| line.strip.empty? || line.include?("#") }.
+    reject { |line| line.empty? || line[0] == "#" }.
     map { |line| line.strip.split(", ") }.
     reject do |resolverecord|
   end.
