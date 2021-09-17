@@ -33,7 +33,7 @@ def parse_dns(dns_string)
       arr[x][y]=input[y].strip
     end
   end
- h= Hash[arr.map { |key,d1,d2| [d1,{:type=>key,:target=>d2}]}]
+ dns_record= Hash[arr.map { |key,d1,d2| [d1,{:type=>key,:target=>d2}]}]
  end
 
 # dns resolver
