@@ -2,10 +2,10 @@ require "date"
 
 
 class Todo
-   def initialize(text, due_date, completed)
-  @text=text
-  @due_date=due_date
-  @completed=completed
+ def initialize(text, due_date, completed)
+     @text=text
+     @due_date=due_date
+     @completed=completed
  end
 
  def to_displayable_string
